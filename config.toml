@@ -1,0 +1,11 @@
+[ingestion]
+src_dir = "./test/sample_dir/"
+state_file = "./state.json"
+
+[embedding]
+model_name = "nomic-embed-text"
+base_url = "http://localhost:11434"
+
+[qdrant]
+url = "http://localhost:6333/"
+collection_name = "test_store"

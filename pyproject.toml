@@ -9,6 +9,7 @@ dependencies = [
     "llama-index-embeddings-ollama>=0.9.0",
     "llama-index-llms-ollama>=0.10.1",
     "llama-index-vector-stores-qdrant>=0.10.1",
+    "pydantic>=2.13.4",
     "qdrant-client>=1.18.0",
 ]
 
@@ -17,4 +18,9 @@ dev = [
     "marimo>=0.23.8",
     "pytest>=9.0.3",
     "python-dotenv>=1.2.2",
-]
+] 
+
+
+[tool.uv]
+package = false
+

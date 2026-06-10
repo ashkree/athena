@@ -1,5 +1,11 @@
+from core.config import Config
+from ingest.pipeline import ingest
+
+
 def main():
-    print("Hello from apollo!")
+
+    config = Config.load("./config.toml")
+    ingest(config)
 
 
 if __name__ == "__main__":

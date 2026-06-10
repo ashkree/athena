@@ -45,7 +45,7 @@ def _():
     else: 
         reader = SimpleDirectoryReader(input_files = modified_files)
         documents = reader.load_data() 
-    
+
         __import__(name="pprint").pprint(documents[0].to_dict())
     return (documents,)
 
@@ -70,26 +70,34 @@ def _(nodes):
     from llama_index.vector_stores.qdrant import QdrantVectorStore
     from qdrant_client import QdrantClient
 
-    Settings.embed_model = OllamaEmbedding(model_name="qwen3-embedding:4b", base_url="http://localhost:11434")
+    Settings.embed_model = OllamaEmbedding(
+        model_name="nomic-embed-text", 
+        base_url="http://localhost:11434", 
+        keep_alive=0)
 
     client = QdrantClient(location=":memory:")
     vector_store = QdrantVectorStore(client=client, collection_name="obsidian_vault")
     storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
     index = VectorStoreIndex(nodes=nodes, storage_context=storage_context)
-    return Settings, index
+    return
 
 
-@app.cell
-def _(Settings, index):
+app._unparsable_cell(
+    r"""
     from llama_index.llms.ollama import Ollama
 
-    Settings.llm = Ollama(model="qwen3:4b", base_url="http://localhost:11434")
-
+    Settings.llm = Ollama(
+        model="qwen3:4b", 
+        base_url="http://localhost:11434",
+        context_window=8192,
+        request_timeout=120.0
     query_engine = index.as_query_engine()
     response = query_engine.query("What is the main topic?")
     print(response)
-    return
+    """,
+    name="_"
+)
 
 
 @app.cell
