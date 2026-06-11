@@ -1,3 +1,4 @@
+import os
 import tomllib
 from typing import Any
 
@@ -36,6 +37,6 @@ class Config(BaseModel):
 
     @classmethod
     def load(cls, path: str = "config.toml") -> "Config":
-        with open(file=path, mode="rb") as f:
+        with open(file=os.path.expanduser(path), mode="rb") as f:
             raw: dict[str, Any] = tomllib.load(f)  # type: ignore[assignment]
         return cls.model_validate(obj=raw)

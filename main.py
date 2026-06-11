@@ -10,7 +10,7 @@ app = FastAPI()
 
 
 def get_config():
-    return Config.load("./config.toml")
+    return Config.load("~/.config/athena/config.toml")
 
 
 def get_clients(config: Config = Depends(get_config)):
