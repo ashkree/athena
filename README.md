@@ -2,6 +2,14 @@
 
 A personal knowledge base assistant. Ask questions, get answers grounded in your own notes.
 
+![Version](https://img.shields.io/badge/version-0.1.0-blue)
+![Python](https://img.shields.io/badge/python-3.12+-3776AB?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.136.3-009688?logo=fastapi&logoColor=white)
+![LlamaIndex](https://img.shields.io/badge/LlamaIndex-0.14.22-purple)
+![Ollama](https://img.shields.io/badge/Ollama-local-black?logo=ollama&logoColor=white)
+![Qdrant](https://img.shields.io/badge/Qdrant-1.18.0-red)
+![Docker](https://img.shields.io/badge/Docker-required-2496ED?logo=docker&logoColor=white)
+
 Athena is a local-first RAG (Retrieval-Augmented Generation) pipeline that ingests Markdown files, embeds them into a vector store, and lets you query them via a simple HTTP API. Everything runs on your machine — no cloud required.
 
 > This is v1: a minimal, working baseline. The goal is to build on this iteratively.
