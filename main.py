@@ -1,14 +1,44 @@
+from fastapi import Depends, FastAPI
+from pydantic import BaseModel
+
 from core.clients import Client
 from core.config import Config
 from ingest.pipeline import ingest
+from retrieval.pipeline import query
+
+app = FastAPI()
 
 
-def main():
-
-    config = Config.load("./config.toml")
-    clients = Client(config)
-    ingest(config, clients)
+def get_config():
+    return Config.load("./config.toml")
 
 
-if __name__ == "__main__":
-    main()
+def get_clients(config: Config = Depends(get_config)):
+    return Client(config)
+
+
+class QueryRequest(BaseModel):
+    question: str
+
+
+@app.get("/health")
+async def root():
+    return {"status": "ok"}
+
+
+@app.post("/ingest")
+async def ingest_directory(
+    config: Config = Depends(get_config), clients: Client = Depends(get_clients)
+):
+    ingest(config=config, clients=clients)
+    return {"status": "ok"}
+
+
+@app.post("/query")
+async def query_directory(
+    req: QueryRequest,
+    config: Config = Depends(get_config),
+    clients: Client = Depends(get_clients),
+):
+
+    return query(config=config, clients=clients, question=req.question)

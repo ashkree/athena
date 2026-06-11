@@ -27,3 +27,6 @@ package = false
 [tool.setuptools.packages.find]
 where = ["."]
 
+[tool.fastapi]
+entrypoint = "main:app"
+
