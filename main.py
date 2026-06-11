@@ -7,7 +7,7 @@ def main():
 
     config = Config.load("./config.toml")
     clients = Client(config)
-    ingest(config)
+    ingest(config, clients)
 
 
 if __name__ == "__main__":

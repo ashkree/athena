@@ -19,12 +19,20 @@ class QdrantConfig(BaseModel):
     collection_name: str
 
 
+class LLMConfig(BaseModel):
+    model_name: str
+    url: str
+    context_window: int
+    request_timeout: int
+
+
 class Config(BaseModel):
     model_config = ConfigDict(frozen=True)  # type: ignore[misc]
 
     ingestion: IngestionConfig
     embedding: EmbeddingConfig
     qdrant: QdrantConfig
+    llm: LLMConfig
 
     @classmethod
     def load(cls, path: str = "config.toml") -> "Config":

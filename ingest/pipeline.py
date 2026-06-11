@@ -1,5 +1,3 @@
-# public interface
-
 import json
 import time
 from pathlib import Path
@@ -10,6 +8,8 @@ from llama_index.core.node_parser import MarkdownNodeParser
 
 from core.clients import Client
 from core.config import Config
+
+# public interface
 
 
 def ingest(config: Config, clients: Client):
