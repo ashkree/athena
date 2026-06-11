@@ -30,8 +30,7 @@ async def root():
 async def ingest_directory(
     config: Config = Depends(get_config), clients: Client = Depends(get_clients)
 ):
-    ingest(config=config, clients=clients)
-    return {"status": "ok"}
+    return ingest(config=config, clients=clients)
 
 
 @app.post("/query")

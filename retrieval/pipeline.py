@@ -18,6 +18,10 @@ def query(config: Config, clients: Client, question: str):
         vector_store=clients.vector_store, embed_model=clients.embedding
     )
 
-    query_engine = index.as_query_engine(llm=llm)
+    query_engine = index.as_query_engine(
+        llm=llm,
+        similarity_top_k=3,  # only fetch 3 chunks instead of default 2 (adjustable)
+        streaming=False,
+    )
 
     return query_engine.query(question)

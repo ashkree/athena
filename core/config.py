@@ -24,7 +24,7 @@ class LLMConfig(BaseModel):
     model_name: str
     url: str
     context_window: int
-    request_timeout: int
+    request_timeout: float
 
 
 class Config(BaseModel):
